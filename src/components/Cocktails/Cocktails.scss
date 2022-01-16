@@ -1,0 +1,28 @@
+@import '~bootstrap/scss/bootstrap';
+
+.cocktails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__card {
+        max-width: 80rem;
+        width: 100%;
+        height: auto;
+        color: #4a0b0b !important;
+    }
+
+    &__card-body {
+        display: flex;
+        flex-direction: row;
+        font-size: 1.3rem;
+        padding: 1rem;
+    }
+
+    &__image {
+        width: 25rem;
+        height: 25rem;
+        border-radius: 2rem;
+        margin-right: 5rem;
+    }
+}

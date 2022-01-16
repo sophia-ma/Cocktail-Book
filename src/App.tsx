@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Cocktails } from './components';
 import { Cocktail } from './interfaces';
 import './App.scss';
 
@@ -8,38 +9,40 @@ function App() {
 
     const cocktailsApiUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=`;
 
-    const getThreeRandomCocktails = (array: []) => array?.sort(() => 0.5 - Math.random()).slice(0, 3);
+    const getRandomCocktails = (array: [], size: number) => array?.sort(() => 0.5 - Math.random()).slice(0, size);
 
     useEffect(() => {
-        fetchCocktails('z');
+        fetchCocktails();
     }, []);
 
-    const fetchCocktails = (queryParam: string) => {
+    const fetchCocktails = (queryParam: string = ' ', size = 3) => {
         fetch(`${cocktailsApiUrl}${queryParam}`)
             .then((res) => res.json())
             .then((response) => {
-                setCocktails(getThreeRandomCocktails(response?.drinks));
+                setCocktails(getRandomCocktails(response?.drinks, size));
             });
     };
 
     const onSearchChange = (newSearchTerm: string) => setSearchTerm(newSearchTerm);
 
-    const onSearchClick = () => fetchCocktails(searchTerm);
+    const onSearchClick = () => fetchCocktails(searchTerm, 10);
 
-    useEffect(() => {
-        console.log('%c⧭', 'color: #00a3cc', cocktails);
-    }, [cocktails]);
+    const renderNav = () => (
+        <nav className="app__nav bg-primary d-flex">
+            <input className="form-control me-2" type="text" placeholder="Search" onChange={(e) => onSearchChange(e.target.value)} />
+            <button className="btn btn-secondary my-2 my-sm-0" type="button" onClick={onSearchClick}>
+                Search
+            </button>
+        </nav>
+    );
 
     return (
         <div className="app">
             <h1 className="app__title">The Cocktails Book</h1>
 
-            <nav className="app__nav bg-primary d-flex">
-                <input className="form-control me-2" type="text" placeholder="Search" onChange={(e) => onSearchChange(e.target.value)} />
-                <button className="btn btn-secondary my-2 my-sm-0" type="button" onClick={onSearchClick}>
-                    Search
-                </button>
-            </nav>
+            {renderNav()}
+
+            <Cocktails cocktails={cocktails} />
         </div>
     );
 }

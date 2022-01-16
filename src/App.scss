@@ -1,17 +1,16 @@
 .app {
-    margin: 5rem 10rem;
+    margin: 5rem;
 
     &__title {
-        // font-family: Snell Roundhand, cursive;
-        // font-family: Bradley Hand, cursive;
-        // font-family: Apple Chancery, cursive;
         font-size: 5rem;
         text-align: center;
-        margin-bottom: 2rem;
     }
 
     &__nav {
-        padding: 3rem;
-        border-radius: 2rem;
+        padding: 1.5rem 2rem;
+        border-radius: 1rem;
+        margin: 2rem auto 4rem;
+        width: 50rem;
+        text-align: center;
     }
 }
