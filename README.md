@@ -1,5 +1,5 @@
 ##  About
-This is a personal project built in React. It uses the TheCocktailDB API to display cocktail recipes.
+This is a personal project built in React. It uses the TheCocktailDB API to display cocktail recipes. Click [here](https://cocktails-book.netlify.app/) for a live demo.
 
 ![image](https://user-images.githubusercontent.com/40169038/149674531-e9cb30ea-c74e-441b-839e-b05b8c798af3.png)
 
@@ -8,6 +8,7 @@ This is a personal project built in React. It uses the TheCocktailDB API to disp
 - React
 - Typescript
 - Bootstrap
+
 
 # Getting Started with Create React App
 
