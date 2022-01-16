@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Cocktails } from './components';
 import { Cocktail } from './interfaces';
 import './App.scss';
@@ -11,17 +11,20 @@ function App() {
 
     const getRandomCocktails = (array: [], size: number) => array?.sort(() => 0.5 - Math.random()).slice(0, size);
 
+    const fetchCocktails = useCallback(
+        (queryParam: string = ' ', size = 3) => {
+            fetch(`${cocktailsApiUrl}${queryParam}`)
+                .then((res) => res.json())
+                .then((response) => {
+                    setCocktails(getRandomCocktails(response?.drinks, size));
+                });
+        },
+        [cocktailsApiUrl],
+    );
+
     useEffect(() => {
         fetchCocktails();
-    }, []);
-
-    const fetchCocktails = (queryParam: string = ' ', size = 3) => {
-        fetch(`${cocktailsApiUrl}${queryParam}`)
-            .then((res) => res.json())
-            .then((response) => {
-                setCocktails(getRandomCocktails(response?.drinks, size));
-            });
-    };
+    }, [fetchCocktails]);
 
     const onSearchChange = (newSearchTerm: string) => setSearchTerm(newSearchTerm);
 
